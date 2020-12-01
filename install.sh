@@ -6,4 +6,5 @@ pip install Pillow==2.2.1
 pip install asciimatics 
 pip install pyfiglet
 pip install colorama
-pip install PyPDF2
+pip install fitz
+pip install PyMuPDF
