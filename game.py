@@ -3,6 +3,8 @@ from colorama import Fore, Back, Style  #Fore: BLACK, RED, GREEN, YELLOW, BLUE, 
                                         #Back: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
                                         #Style: DIM, NORMAL, BRIGHT, RESET_ALL
 import gpt_2_simple as gpt2
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 def Play(a):
 
@@ -20,7 +22,7 @@ def Play(a):
       sess,
       dataset  = file_name,
       model_name = '774M',
-      steps=1000,
+      steps=500,
       restore_from='fresh',
       run_name = 'run1',
       print_every = 1000,
@@ -30,9 +32,16 @@ def Play(a):
 
   print(Style.BRIGHT+l)
   print(Fore.RESET)
-  input1=""
-  while input1 != 'esc':
-    input1 = input("Enter something or esc to exit")
+  name = input("Enter your name ")
+  i=1
+  while True:
+    if i ==1:
+      input1 = "You are "+name
+      i+=1
+    else:
+      input1 = input("Enter something or esc to exit ")
+      if input1 == "esc":
+        exit()
     gpt2.generate(sess,
                 length=250,
                 temperature=0.7,
