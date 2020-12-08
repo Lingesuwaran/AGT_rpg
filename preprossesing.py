@@ -2,10 +2,13 @@ import fitz
 import ebooklib
 from ebooklib import epub
 from bs4 import BeautifulSoup
+import os
 
 blacklist = [   '[document]',   'noscript', 'header',   'html', 'meta', 'head','input', 'script', 'style'  ]
 
-file_name=input("Enter the file name with extention")
+data = "/content/AGT_rpg/Books/"
+file_names = os.listdir(data)
+file_name=data+str(file_names[0])
 file_ext = file_name.split('.')
 
 
@@ -39,18 +42,20 @@ def epub2text(epub_path):
   ttext = thtml2ttext(chapters)
   return ttext
 
-
 if file_ext[1] == 'pdf':
-  pdf=fitz.open("/content/AGT_rpg/Books/"+file_name)
+  pdf=fitz.open(file_name)
   n=pdf.pageCount
   for i in range(n):
     page = pdf.loadPage(i)
     text = page.getText('text')
     with open('/content/AGT_rpg/Books/data.txt','a')as file:
+      text = text.replace('\n',' ')
+      text = text.replace('”','')
+      text = text.replace('“','')
       file.write(text.replace('\t',' '))
   pdf.close()
 elif file_ext[1] == 'epub':
-  text_L = epub2text("/content/AGT_rpg/Books/"+file_name)
+  text_L = epub2text(file_name)
   text = ''''''
   for i in text_L:
     text += i
@@ -58,7 +63,7 @@ elif file_ext[1] == 'epub':
   text = text.replace('”','')
   text = text.replace('“','')
   with open('/content/AGT_rpg/Books/data.txt','a')as file:
-      file.write(text)
+      file.write(text.replace('\t',' '))
 else:
   print('invalid')
 
