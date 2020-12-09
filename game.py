@@ -58,6 +58,8 @@ def Play(a):
                 run_name='run1',
                 return_as_list=True
                 )
+    
+    print(Fore.RESET + Style.RESET_ALL)
     print(stories[3])
 
 
