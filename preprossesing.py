@@ -64,6 +64,8 @@ elif file_ext[1] == 'epub':
   text = text.replace('“','')
   with open('/content/AGT_rpg/Books/data.txt','a')as file:
       file.write(text.replace('\t',' '))
+elif file_ext[1]== 'txt':
+  print("done")
 else:
   print('invalid')
 

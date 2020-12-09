@@ -12,24 +12,30 @@ def Play(a):
 
   l=pyfiglet.figlet_format("Loading...", font = "slant")
   g=pyfiglet.figlet_format("Generating world...", font = "slant")
+  print(Fore.BLACK + Style.DIM)
+  if  os.path.isdir("/content/AGT_rpg/models")== True:
+    print("model exists")
+  else:
+    print("downloading model")
+    gpt2.download_gpt2(model_name="124M")
   print(Fore.GREEN)
-
-  gpt2.download_gpt2(model_name="774M")
   print(Style.BRIGHT+g)
+  print(Fore.BLACK + Style.DIM)
   sess = gpt2.start_tf_sess()
 
   gpt2.finetune(
       sess,
       dataset  = file_name,
-      model_name = '774M',
-      steps=500,
+      model_name = '124M',
+      steps=100,
       restore_from='fresh',
       run_name = 'run1',
-      print_every = 1000,
+      print_every = 1,
       sample_every = 5000,
-      save_every = 100         
+      save_every = 10         
                 )
-
+				
+  print(Fore.GREEN)
   print(Style.BRIGHT+l)
   print(Fore.RESET)
   name = input("Enter your name ")
@@ -42,16 +48,17 @@ def Play(a):
       input1 = input("Enter something or esc to exit ")
       if input1 == "esc":
         exit()
-    gpt2.generate(sess,
+    stories = gpt2.generate(sess,
                 length=250,
                 temperature=0.7,
                 prefix=input1,
                 nsamples=5,
                 batch_size=5,
                 top_k=40,
-                run_name='run1'
+                run_name='run1',
+                return_as_list=True
                 )
-
+    print(stories[3])
 
 
 
@@ -69,7 +76,7 @@ if __name__ == "__main__":
     if inp=="1":
       Play("1")
     elif inp=="2":
-      print("Load")
+      print("Load under development")
     elif inp=="3":
       exit()
     else:
