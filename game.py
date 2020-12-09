@@ -10,14 +10,13 @@ def Play(a):
 
   file_name = "/content/AGT_rpg/Books/data.txt"
 
-  l=pyfiglet.figlet_format("Loading...", font = "slant")
   g=pyfiglet.figlet_format("Generating world...", font = "slant")
   print(Fore.BLACK + Style.DIM)
   if  os.path.isdir("/content/AGT_rpg/models")== True:
     print("model exists")
   else:
     print("downloading model")
-    gpt2.download_gpt2(model_name="124M")
+    gpt2.download_gpt2(model_name="355M")
   print(Fore.GREEN)
   print(Style.BRIGHT+g)
   print(Fore.BLACK + Style.DIM)
@@ -26,19 +25,23 @@ def Play(a):
   gpt2.finetune(
       sess,
       dataset  = file_name,
-      model_name = '124M',
-      steps=100,
+      model_name = '355M',
+      steps=500,
       restore_from='fresh',
       run_name = 'run1',
       print_every = 1,
       sample_every = 5000,
-      save_every = 10         
+      save_every = 100         
                 )
-				
+
+def loader():
   print(Fore.GREEN)
+  l=pyfiglet.figlet_format("Loading...", font = "slant")
   print(Style.BRIGHT+l)
   print(Fore.RESET)
   name = input("Enter your name ")
+  sess = gpt2.start_tf_sess()
+  gpt2.load_gpt2(sess)
   i=1
   while True:
     if i ==1:
@@ -55,11 +58,16 @@ def Play(a):
                 nsamples=5,
                 batch_size=5,
                 top_k=40,
-                run_name='run1',
+                run_name = 'run1',
                 return_as_list=True
                 )
     
     print(Fore.RESET + Style.RESET_ALL)
+    story = ""
+    temp = stories[3].split(".")
+    del temp[-1]
+    for i in temp:
+      story = story +i+'.'
     print(stories[3])
 
 
@@ -77,8 +85,12 @@ if __name__ == "__main__":
 
     if inp=="1":
       Play("1")
+      loader()
     elif inp=="2":
-      print("Load under development")
+      if  os.path.isdir("/content/AGT_rpg/checkpoint/run1")== True:
+        loader()
+      else:
+        print("no file to load")
     elif inp=="3":
       exit()
     else:
