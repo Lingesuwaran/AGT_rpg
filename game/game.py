@@ -8,11 +8,11 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def Play(a):
 
-  file_name = "/content/temp/AGT_rpg/Books/data.txt"
+  file_name = "/content/AGT_rpg/Books/data.txt"
 
   g=pyfiglet.figlet_format("Generating world...", font = "slant")
   print(Fore.BLACK + Style.DIM)
-  if  os.path.isdir("/content/temp/models")== True:
+  if  os.path.isdir("/content/AGT_rpg/models")== True:
     print("model exists")
   else:
     print("downloading model")
@@ -26,12 +26,12 @@ def Play(a):
       sess,
       dataset  = file_name,
       model_name = '355M',
-      steps=10,
+      steps=500,
       restore_from='fresh',
       run_name = 'run1',
       print_every = 1,
       sample_every = 5000,
-      save_every = 10         
+      save_every = 100         
                 )
 
 def loader(input1):
@@ -44,7 +44,7 @@ def loader(input1):
   gpt2.load_gpt2(sess)
 
   if input1 ==1:
-    input1 = "You are "+name
+    input1 = "I am "+name
   stories = gpt2.generate(sess,
                 length=250,
                 temperature=0.7,
@@ -77,7 +77,7 @@ def Menu(val,input1):
     inp=str(val)
     data = ""
     if inp=="1":
-      if  os.path.isdir("/content/temp/checkpoint/run1")== True:
+      if  os.path.isdir("/content/AGT_rpg/checkpoint/run1")== True:
         data = loader(input1)
       else:
         Play("1")

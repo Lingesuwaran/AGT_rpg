@@ -1,6 +1,6 @@
 from flask_ngrok import run_with_ngrok
 from flask import Flask, render_template,request
-from AGT_rpg import game
+from game import game
 
 
 app = Flask(__name__)
