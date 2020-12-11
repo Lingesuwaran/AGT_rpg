@@ -10,3 +10,4 @@ pip install fitz
 pip install PyMuPDF
 pip install ebooklib
 pip install BeautifulSoup4
+pip install flask_ngrok
