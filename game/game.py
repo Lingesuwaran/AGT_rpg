@@ -16,7 +16,7 @@ def Play(a):
     print("model exists")
   else:
     print("downloading model")
-    gpt2.download_gpt2(model_name="355M")
+    gpt2.download_gpt2(model_name="774M")
   print(Fore.GREEN)
   print(Style.BRIGHT+g)
   print(Fore.BLACK + Style.DIM)
@@ -25,8 +25,8 @@ def Play(a):
   gpt2.finetune(
       sess,
       dataset  = file_name,
-      model_name = '355M',
-      steps=500,
+      model_name = '774M',
+      steps=700,
       restore_from='fresh',
       run_name = 'run1',
       print_every = 1,
