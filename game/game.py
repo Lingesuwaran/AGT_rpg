@@ -39,12 +39,11 @@ def loader(input1):
   l=pyfiglet.figlet_format("Loading...", font = "slant")
   print(Style.BRIGHT+l)
   print(Fore.RESET)
-  name = 'Leo'
   sess = gpt2.start_tf_sess()
   gpt2.load_gpt2(sess)
 
   if input1 ==1:
-    input1 = "I am "+name
+    input1 = "I am "+'%Name'
   stories = gpt2.generate(sess,
                 length=250,
                 temperature=0.7,

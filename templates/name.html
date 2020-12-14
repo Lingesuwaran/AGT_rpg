@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>AGT_rpg</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/play.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/style.css')}}">
+    </head>
+    <body>
+            <form action="./Play" method="post">
+              <h2>Character name</h2>
+              <div class="inputBox">
+              <input type="text" name="input" placeholder="Enter the name">
+              <input type="submit" value="Enter">
+              </div>
+            </form>     
+    </body>
+</html>
