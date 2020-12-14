@@ -10,3 +10,4 @@ pip install PyMuPDF
 pip install ebooklib
 pip install BeautifulSoup4
 pip install flask_ngrok
+pip install gpt_2_simple
